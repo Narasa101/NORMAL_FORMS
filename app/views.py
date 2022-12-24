@@ -70,4 +70,38 @@ def insert_AR(request):
         return HttpResponse('insert_ accessrecords successfully')
     return render(request,'insert_AR.html',d)
 
+def select_topic(request):
+    topics=Topic.objects.all()
+    d={'topics':topics}
 
+    if request.method=='POST':
+        tn=request.POST.getlist('topic')
+        print(tn)
+        webpages=Webpage.objects.none()
+        for i in tn:
+            webpages=webpages|Webpage.objects.filter(topic_name=i)
+        data={'webpages':webpages}
+        return render(request,'display_webpage.html',data)
+    return render(request,'select_topic.html',d)
+
+
+def checkbox(request):
+    topics=Topic.objects.all()
+    d={'topics':topics}
+
+    return render(request,'checkbox.html',d)
+
+
+def select_AccessRecords(request):
+    webpages=Webpage.objects.all()
+    d={'webpages':webpages}
+    if request.method=="POST":
+        tn=request.POST.getlist('AR')
+        print(tn)
+        accessrecords=AccessRecords.objects.none()
+        for i in tn:
+            accessrecords=accessrecords|AccessRecords.objects.filter(id=i)
+        data={'accessrecords':accessrecords}
+    
+        return render(request,'display_AccessRecords.html',data)
+    return render(request,'select_AccessRecords.html',d)

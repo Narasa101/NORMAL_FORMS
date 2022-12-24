@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>select_AccessRecords</title>
+</head>
+<body>
+    <center>
+        <h1>select_AccessRecords</h1>
+        <form action="" method="POST">
+            {% csrf_token %}
+
+            <label for="AR">Name</label>
+            <select name="AR" id="AR" multiple>
+                {% for ao in webpages %}
+                    <option value="{{ao.id}}">{{ao.id}}</option>
+                {% endfor %}
+            </select><br><br>
+
+            <input type="submit" value="Retrieve">
+        </form>
+    </center>
+</body>
+</html>
